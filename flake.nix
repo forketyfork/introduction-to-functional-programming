@@ -7,10 +7,7 @@
 
   outputs = { self, nixpkgs, ... }:
     let
-      systems = [
-        "aarch64-darwin"
-        "x86_64-linux"
-      ];
+      systems = nixpkgs.lib.systems.flakeExposed;
 
       forEachSystem = nixpkgs.lib.genAttrs systems;
     in
