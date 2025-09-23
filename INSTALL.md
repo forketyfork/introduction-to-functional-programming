@@ -1,101 +1,58 @@
 # Installing Miranda
 
-This project requires the Miranda programming language interpreter. Follow the instructions below to install Miranda on your system.
+This project now provides a reproducible Nix development environment that builds
+the Miranda interpreter directly from source. The flake ensures the
+`mira` binary and its standard library are available for the Makefile targets
+and tests in this repository.
 
-## Prerequisites
+## Recommended: Use the Nix Flake
 
-- C compiler (gcc or clang)
-- make
-- UNIX-like system (Linux, macOS, WSL)
+1. [Install Nix](https://nixos.org/download.html) if you don't already have it.
+2. (Optional but convenient) enable
+   [`direnv`](https://direnv.net/) with [nix-direnv](https://github.com/nix-community/nix-direnv)
+   so the environment is loaded automatically.
+3. Allow the flake for this repository:
 
-## Installation Steps
+   ```bash
+   direnv allow   # if using direnv
+   # or start a shell manually
+   nix develop
+   ```
 
-### Option 1: Download from Official Site (Recommended)
+The first activation will compile Miranda from source using the pinned
+configuration in `flake.nix`. Afterwards, the `mira` command is on your `PATH`
+and exported via the `MIRA` variable so that `make run`, `make demo`, and
+`make test` work without any additional setup.
 
-1. Visit the official Miranda homepage: http://miranda.org.uk/
-2. Download the latest Miranda source code from the downloads section
-3. Extract the archive to a directory of your choice
+## Alternative: Manual Installation
 
-### Option 2: Clone from Repository
+If you cannot use Nix, follow the upstream instructions to build Miranda
+manually:
 
-```bash
-# Clone the open source Miranda implementation
-git clone https://codeberg.org/miranda-ng/miranda.git
-cd miranda
-```
+1. Clone the open-source implementation:
 
-### Building Miranda
+   ```bash
+   git clone https://github.com/ncihnegn/miranda
+   cd miranda
+   ```
 
-1. Navigate to the Miranda source directory
-2. Clean any existing build artifacts:
+2. Build the interpreter:
+
    ```bash
    make cleanup
-   ```
-
-3. Build Miranda:
-   ```bash
    make
-   ```
-
-4. Test the installation:
-   ```bash
    ./mira
    ```
 
-### Adding Miranda to PATH (Optional)
+3. Add the resulting directory to your `PATH` or symlink `mira` into a
+   location that is already on your `PATH`.
 
-To use Miranda from anywhere, add it to your PATH:
-
-```bash
-# Add to your ~/.bashrc, ~/.zshrc, or equivalent
-export PATH="/path/to/miranda:$PATH"
-```
-
-Or create a symlink:
-```bash
-sudo ln -s /path/to/miranda/mira /usr/local/bin/mira
-```
-
-## Usage
-
-### Running Miranda Scripts
-
-```bash
-# Run a Miranda script
-mira script.m
-
-# Interactive mode
-mira
-```
-
-### Example Session
-
-```miranda
-mira> 2 + 3
-5
-mira> let double x = x * 2
-mira> double 5
-10
-mira> /q
-```
-
-## Project Usage
-
-Once Miranda is installed, you can run the exercises:
+Once Miranda is installed you can run the project exercises:
 
 ```bash
 cd src
 mira main.m
 ```
 
-## Troubleshooting
-
-- If you encounter build errors, check that you have a C11/C18 compatible compiler
-- On macOS, you may need to install Xcode command line tools: `xcode-select --install`
-- On Ubuntu/Debian, install build essentials: `sudo apt-get install build-essential`
-
-## References
-
-- Miranda homepage: http://miranda.org.uk/
-- GitHub mirror: https://github.com/ncihnegn/miranda
-- Documentation: https://github.com/garrett-may/miranda-documentation
+For additional troubleshooting tips, consult the upstream Miranda
+documentation at https://github.com/ncihnegn/miranda.
