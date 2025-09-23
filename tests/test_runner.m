@@ -27,10 +27,10 @@ test_max_cases = [test_eq 5 (maximum 5 3) "maximum 5 3 = 5",
                   test_eq 0 (maximum 0 (-1)) "maximum 0 (-1) = 0",
                   test_eq 10 (maximum 10 5) "maximum 10 5 = 10"]
 
-|| Test circle_area function (using integer approximation)
-test_circle_area_cases = [test_eq 22 (circle_area 1) "circle_area 1 ≈ 22/7",
-                          test_eq 88 (circle_area 2) "circle_area 2 ≈ 88/7",
-                          test_eq 22 (circle_area 1) "circle_area 1 = 22/7"]
+|| Test circle_area function (using fractional approximation)
+test_circle_area_cases = [test_eq (22/7) (circle_area 1) "circle_area 1 = 22/7",
+                          test_eq (88/7) (circle_area 2) "circle_area 2 = 88/7",
+                          test_eq 154 (circle_area 7) "circle_area 7 = 154"]
 
 || Test square helper function
 test_square_cases = [test_eq 4 (square 2) "square 2 = 4",
