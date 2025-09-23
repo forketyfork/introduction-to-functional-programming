@@ -29,30 +29,33 @@
               owner = "ncihnegn";
               repo = "miranda";
               rev = "21206e7dab13afd681b6f16d2482a5e8180223bb";
-              sha256 = "sha256-LbJk5qd7yRp60z+us1UH67Ft1hPgo1pmCcmYyMCWm4o=";
+              sha256 = "sha256-UjEDFif5oA9SzfKgeZ9R+0bOHRAoVphCIoDCsFBUDJA=";
             };
 
             nativeBuildInputs = [
               pkgs.byacc
               pkgs.makeWrapper
+              pkgs.gcc
             ];
 
             dontConfigure = true;
 
             buildPhase = ''
               runHook preBuild
-              make $makeFlags
+              export BUILD_DATE="25 May 2025"
+
+              # Create a proper .host file instead of relying on gcc -v
+              echo "compiled on Nix build system" > .host
+
+              make
               runHook postBuild
             '';
 
             postPatch = ''
               substituteInPlace Makefile \
-                --replace "`git show -s --format=%cd --date=format:'%d %b %Y'`" '$(BUILD_DATE)'
+                --replace "\`git show -s --format=%cd --date=format:'%d %b %Y'\`" '$(BUILD_DATE)' \
+                --replace '$(CC) -v 2>> .host' '$(CC) -v 2>> .host || true'
             '';
-
-            makeFlags = [
-              ''BUILD_DATE="25 May 2025"''
-            ];
 
             installPhase = ''
               runHook preInstall
