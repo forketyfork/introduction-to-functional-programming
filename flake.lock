@@ -3,7 +3,7 @@
     "flake-utils": {
       "locked": {
         "lastModified": 1731533236,
-        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
+        "narHash": "sha256-V3nDbPw+5JUmsFMVKxAVDrm7042j/maA0sE2Hk32WYM=",
         "owner": "numtide",
         "repo": "flake-utils",
         "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
