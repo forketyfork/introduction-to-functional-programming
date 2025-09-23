@@ -3,92 +3,110 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = import nixpkgs {
-          inherit system;
-        };
+  outputs = { self, nixpkgs, ... }:
+    let
+      systems = [
+        "aarch64-darwin"
+        "x86_64-linux"
+      ];
 
-        miranda = pkgs.stdenv.mkDerivation {
-          pname = "miranda";
-          version = "unstable-2025-05-25";
-
-          src = pkgs.fetchFromGitHub {
-            owner = "ncihnegn";
-            repo = "miranda";
-            rev = "21206e7dab13afd681b6f16d2482a5e8180223bb";
-            sha256 = "sha256-LbJk5qd7yRp60z+us1UH67Ft1hPgo1pmCcmYyMCWm4o=";
+      forEachSystem = nixpkgs.lib.genAttrs systems;
+    in
+    rec {
+      packages = forEachSystem (system:
+        let
+          pkgs = import nixpkgs {
+            inherit system;
           };
 
-          nativeBuildInputs = [
-            pkgs.byacc
-            pkgs.makeWrapper
-          ];
+          miranda = pkgs.stdenv.mkDerivation {
+            pname = "miranda";
+            version = "unstable-2025-05-25";
 
-          dontConfigure = true;
+            src = pkgs.fetchFromGitHub {
+              owner = "ncihnegn";
+              repo = "miranda";
+              rev = "21206e7dab13afd681b6f16d2482a5e8180223bb";
+              sha256 = "sha256-LbJk5qd7yRp60z+us1UH67Ft1hPgo1pmCcmYyMCWm4o=";
+            };
 
-          buildPhase = ''
-            runHook preBuild
-            make $makeFlags
-            runHook postBuild
-          '';
+            nativeBuildInputs = [
+              pkgs.byacc
+              pkgs.makeWrapper
+            ];
 
-          postPatch = ''
-            substituteInPlace Makefile \
-              --replace "`git show -s --format=%cd --date=format:'%d %b %Y'`" '$(BUILD_DATE)'
-          '';
+            dontConfigure = true;
 
-          makeFlags = [
-            ''BUILD_DATE="25 May 2025"''
-          ];
+            buildPhase = ''
+              runHook preBuild
+              make $makeFlags
+              runHook postBuild
+            '';
 
-          installPhase = ''
-            runHook preInstall
+            postPatch = ''
+              substituteInPlace Makefile \
+                --replace "`git show -s --format=%cd --date=format:'%d %b %Y'`" '$(BUILD_DATE)'
+            '';
 
-            mkdir -p "$out/bin"
-            mkdir -p "$out/lib/miralib"
-            mkdir -p "$out/share/man/man1"
+            makeFlags = [
+              ''BUILD_DATE="25 May 2025"''
+            ];
 
-            cp mira "$out/bin/"
-            cp -r miralib/. "$out/lib/miralib/"
-            cp mira.1 "$out/share/man/man1/"
+            installPhase = ''
+              runHook preInstall
 
-            wrapProgram "$out/bin/mira" \
-              --set MIRALIB "$out/lib/miralib"
+              mkdir -p "$out/bin"
+              mkdir -p "$out/lib/miralib"
+              mkdir -p "$out/share/man/man1"
 
-            runHook postInstall
-          '';
+              cp mira "$out/bin/"
+              cp -r miralib/. "$out/lib/miralib/"
+              cp mira.1 "$out/share/man/man1/"
 
-          meta = with pkgs.lib; {
-            description = "Miranda functional programming language implementation";
-            homepage = "https://github.com/ncihnegn/miranda";
-            license = licenses.gpl2;
-            maintainers = [];
-            platforms = platforms.unix;
+              wrapProgram "$out/bin/mira" \
+                --set MIRALIB "$out/lib/miralib"
+
+              runHook postInstall
+            '';
+
+            meta = with pkgs.lib; {
+              description = "Miranda functional programming language implementation";
+              homepage = "https://github.com/ncihnegn/miranda";
+              license = licenses.gpl2;
+              maintainers = [];
+              platforms = platforms.unix;
+            };
           };
-        };
-      in
-      {
-        packages = {
-          default = miranda;
+        in
+        {
           inherit miranda;
-        };
+          default = miranda;
+        }
+      );
 
-        devShells.default = pkgs.mkShell {
-          packages = [
-            miranda
-            pkgs.gnumake
-            pkgs.git
-          ];
+      devShells = forEachSystem (system:
+        let
+          pkgs = import nixpkgs {
+            inherit system;
+          };
 
-          shellHook = ''
-            export MIRA=${miranda}/bin/mira
-          '';
-        };
-      }
-    );
+          miranda = packages.${system}.miranda;
+        in
+        {
+          default = pkgs.mkShell {
+            packages = [
+              miranda
+              pkgs.gnumake
+              pkgs.git
+            ];
+
+            shellHook = ''
+              export MIRA=${miranda}/bin/mira
+            '';
+          };
+        }
+      );
+    };
 }
