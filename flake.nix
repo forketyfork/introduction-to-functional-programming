@@ -39,7 +39,7 @@
 
             buildPhase = ''
               runHook preBuild
-              export BUILD_DATE="25 May 2025"
+              export BUILD_DATE="$(date '+%d %b %Y')"
 
               # Create a proper .host file instead of relying on gcc -v
               echo "compiled on Nix build system" > .host

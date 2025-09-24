@@ -19,6 +19,17 @@ jobs:
           extra_nix_config: |
             experimental-features = nix-command flakes
 
-      - name: Run tests inside dev shell
+      - name: Run comprehensive validation
         run: |
-          nix develop .# --command bash -c "make check-mira && make test"
+          nix develop .# --command bash -c "
+            set -e
+            echo '=== Running project validation ==='
+            make check-mira
+            ./tests/validate.sh
+            echo '=== Running tests ==='
+            make test
+            echo '=== Running additional checks ==='
+            make run > /dev/null
+            make demo > /dev/null
+            echo '=== All validation checks passed ==='
+          "

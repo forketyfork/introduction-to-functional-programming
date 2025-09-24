@@ -62,7 +62,7 @@ if command -v mira &> /dev/null; then
     # Test main module compilation
     echo "Testing main module..."
     cd src
-    if mira -c main.m &> /dev/null; then
+    if echo "" | mira main.m &> /dev/null; then
         echo "✓ Main module compiles successfully"
     else
         echo "✗ Main module compilation failed"
@@ -75,7 +75,7 @@ if command -v mira &> /dev/null; then
     # Test demo compilation
     echo "Testing demonstration module..."
     cd examples
-    if mira -c chapter01_demo.m &> /dev/null; then
+    if echo "" | mira chapter01_demo.m &> /dev/null; then
         echo "✓ Demo module compiles successfully"
     else
         echo "✗ Demo module compilation failed"
@@ -88,7 +88,7 @@ if command -v mira &> /dev/null; then
     # Test test runner compilation
     echo "Testing test runner..."
     cd tests
-    if mira -c test_runner.m &> /dev/null; then
+    if echo "" | mira test_runner.m &> /dev/null; then
         echo "✓ Test runner compiles successfully"
     else
         echo "✗ Test runner compilation failed"
