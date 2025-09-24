@@ -138,7 +138,7 @@ make check
 ### Miranda Language
 - [Official Miranda Homepage](http://miranda.org.uk/)
 - [Miranda Documentation](https://github.com/garrett-may/miranda-documentation)
-- [Open Source Implementation](https://github.com/ncihnegn/miranda)
+- [Open Source Implementation](https://codeberg.org/DATurner/miranda)
 
 ### Book Reference
 - **Title:** Introduction to Functional Programming
