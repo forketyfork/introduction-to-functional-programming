@@ -48,6 +48,7 @@
 
             postPatch = ''
               substituteInPlace Makefile \
+                --replace "CC = clang" "CC ?= clang" \
                 --replace "\`git show -s --format=%cd --date=format:'%d %b %Y'\`" '$(BUILD_DATE)' \
                 --replace '$(CC) -v 2>> .host' '$(CC) -v 2>> .host || true'
             '';
