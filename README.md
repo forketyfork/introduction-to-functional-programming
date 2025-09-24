@@ -10,7 +10,6 @@ This project transforms the original text-based exercise solutions into a proper
 
 - ✅ Modular source code organization
 - ✅ Comprehensive test coverage
-- ✅ Interactive examples and demonstrations
 - ✅ Build system and automation
 - ✅ Installation and setup documentation
 
@@ -21,8 +20,6 @@ This project transforms the original text-based exercise solutions into a proper
 │   ├── chapter01/
 │   │   └── exercises.m     # Chapter 1 solutions
 │   └── main.m             # Main entry point
-├── examples/               # Interactive demonstrations
-│   └── chapter01_demo.m   # Chapter 1 examples
 ├── tests/                 # Test suites
 │   ├── test_runner.m      # Main test runner
 │   └── validate.sh        # Project validation script
@@ -55,9 +52,6 @@ make
 ```bash
 # Run main program with all exercises
 make run
-
-# Run interactive demonstrations
-make demo
 
 # Run test suite
 make test
@@ -137,18 +131,12 @@ make check
    ]
    ```
 
-4. **Create examples:**
-   ```bash
-   touch examples/chapterN_demo.m
-   ```
-
 ### Build Commands
 
 | Command | Description |
 |---------|-------------|
 | `make help` | Show available commands |
 | `make run` | Execute main program |
-| `make demo` | Run interactive demonstrations |
 | `make test` | Run test suite |
 | `make check` | Validate installation and functionality |
 | `make clean` | Clean generated files |
