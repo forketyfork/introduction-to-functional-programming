@@ -30,6 +30,5 @@ jobs:
             make test
             echo '=== Running additional checks ==='
             make run > /dev/null
-            make demo > /dev/null
             echo '=== All validation checks passed ==='
           "

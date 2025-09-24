@@ -21,7 +21,7 @@ and tests in this repository.
 
 The first activation will compile Miranda from source using the pinned
 configuration in `flake.nix`. Afterwards, the `mira` command is on your `PATH`
-and exported via the `MIRA` variable so that `make run`, `make demo`, and
+and exported via the `MIRA` variable so that `make run` and
 `make test` work without any additional setup.
 
 ## Alternative: Manual Installation
