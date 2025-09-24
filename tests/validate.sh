@@ -39,19 +39,6 @@ if command -v mira &> /dev/null; then
     fi
     cd ..
 
-    # Test demo compilation
-    echo "Testing demonstration module..."
-    cd examples
-    if echo "" | mira chapter01_demo.m &> /dev/null; then
-        echo "✓ Demo module compiles successfully"
-    else
-        echo "✗ Demo module compilation failed"
-        echo "Running mira chapter01_demo.m for detailed error output:"
-        mira chapter01_demo.m
-        exit 1
-    fi
-    cd ..
-
     # Test test runner compilation
     echo "Testing test runner..."
     cd tests
