@@ -1,5 +1,9 @@
 # Introduction to Functional Programming Solutions
 
+[![Build status](https://github.com/forketyfork/introduction-to-functional-programming/actions/workflows/build.yml/badge.svg)](https://github.com/forketyfork/introduction-to-functional-programming/actions/workflows/build.yml)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Miranda](https://img.shields.io/badge/language-Miranda-orange.svg)](http://miranda.org.uk/)
+
 A Miranda implementation of solutions to exercises from **"Introduction to Functional Programming"** by Richard Bird and Philip Wadler.
 
 This repository contains working Miranda code and test suites to help understand functional programming concepts through the Miranda programming language.
