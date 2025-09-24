@@ -1,13 +1,13 @@
 # Installing Miranda
 
-This project now provides a reproducible Nix development environment that builds
+This project provides a reproducible Nix development environment that builds
 the Miranda interpreter directly from source. The flake ensures the
 `mira` binary and its standard library are available for the Makefile targets
 and tests in this repository.
 
 ## Recommended: Use the Nix Flake
 
-1. [Install Nix](https://nixos.org/download.html) if you don't already have it.
+1. [Install Nix](https://nixos.org/download/) if you don't already have it.
 2. (Optional but convenient) enable
    [`direnv`](https://direnv.net/) with [nix-direnv](https://github.com/nix-community/nix-direnv)
    so the environment is loaded automatically.
