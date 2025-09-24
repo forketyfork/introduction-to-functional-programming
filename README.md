@@ -4,16 +4,16 @@ A Miranda implementation of solutions to exercises from **"Introduction to Funct
 
 This repository contains working Miranda code and test suites to help understand functional programming concepts through the Miranda programming language.
 
-## 📚 About
+## About
 
-This project transforms the original text-based exercise solutions into a proper Miranda codebase with:
+This project attempts to transform exercise solutions into a proper Miranda codebase with:
 
-- ✅ Modular source code organization
-- ✅ Comprehensive test coverage
-- ✅ Build system and automation
-- ✅ Installation and setup documentation
+- Modular source code organization
+- Comprehensive test coverage
+- Build system and automation
+- Installation and setup documentation
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 ├── src/                    # Source code by chapter
@@ -28,7 +28,7 @@ This project transforms the original text-based exercise solutions into a proper
 └── README.md             # This file
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Install Miranda
 
@@ -73,19 +73,7 @@ mira> circle_area 7
 154
 ```
 
-## 📖 Current Content
-
-### Chapter 1: Basic Functional Programming
-
-**Exercises implemented:**
-- **1.1.1** - `quad x`: Fourth power function using `square`
-- **1.1.2** - `max x y`: Maximum of two numbers using guards
-- **1.1.3** - `circle_area r`: Circle area using π approximation (22/7)
-
-**Helper functions:**
-- `square x`: Square function for mathematical operations
-
-## 🧪 Testing
+## Testing
 
 The project includes a comprehensive test suite:
 
@@ -100,13 +88,7 @@ make test
 make check
 ```
 
-### Test Coverage
-- ✅ Function correctness verification
-- ✅ Edge case handling
-- ✅ Type safety validation
-- ✅ Module compilation checks
-
-## 🛠️ Development
+## Development
 
 ### Adding New Solutions
 
@@ -141,13 +123,13 @@ make check
 | `make check` | Validate installation and functionality |
 | `make clean` | Clean generated files |
 
-## 🔧 Requirements
+## Requirements
 
 - **Miranda interpreter** (open source since 2020)
 - **C compiler** (gcc/clang for building Miranda)
 - **UNIX-like system** (Linux, macOS, WSL)
 
-## 📚 Resources
+## Resources
 
 ### Miranda Language
 - [Official Miranda Homepage](http://miranda.org.uk/)
@@ -159,20 +141,3 @@ make check
 - **Authors:** Richard Bird, Philip Wadler
 - **Publisher:** Prentice Hall International Series in Computer Science
 
-## 🤝 Contributing
-
-Contributions welcome! Please:
-
-1. Fork the repository
-2. Create a feature branch
-3. Add solutions with tests
-4. Validate with `./tests/validate.sh`
-5. Submit a pull request
-
-## 📄 License
-
-This project contains educational solutions and is intended for learning purposes. Please respect the original book's copyright and use this material responsibly.
-
----
-
-**Happy Functional Programming! 🎉**
