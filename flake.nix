@@ -20,13 +20,11 @@
 
           miranda = pkgs.stdenv.mkDerivation {
             pname = "miranda";
-            version = "unstable-2025-05-25";
+            version = "2.067";
 
-            src = pkgs.fetchFromGitHub {
-              owner = "ncihnegn";
-              repo = "miranda";
-              rev = "21206e7dab13afd681b6f16d2482a5e8180223bb";
-              sha256 = "sha256-UjEDFif5oA9SzfKgeZ9R+0bOHRAoVphCIoDCsFBUDJA=";
+            src = pkgs.fetchurl {
+              url = "https://codeberg.org/DATurner/miranda/archive/miranda-2.067.tar.gz";
+              sha256 = "sha256-8geE3+Y61gC9UoP79kN/blY+amJJn8wIG38ab/gQiF4=";
             };
 
             nativeBuildInputs = [
@@ -50,6 +48,7 @@
 
             postPatch = ''
               substituteInPlace Makefile \
+                --replace "CC = clang" "CC ?= clang" \
                 --replace "\`git show -s --format=%cd --date=format:'%d %b %Y'\`" '$(BUILD_DATE)' \
                 --replace '$(CC) -v 2>> .host' '$(CC) -v 2>> .host || true'
             '';
@@ -73,7 +72,7 @@
 
             meta = with pkgs.lib; {
               description = "Miranda functional programming language implementation";
-              homepage = "https://github.com/ncihnegn/miranda";
+              homepage = "https://codeberg.org/DATurner/miranda";
               license = licenses.gpl2;
               maintainers = [];
               platforms = platforms.unix;
