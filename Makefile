@@ -5,7 +5,6 @@ MIRA = mira
 
 # Source directories
 SRC_DIR = src
-EXAMPLES_DIR = examples
 TESTS_DIR = tests
 
 # Main entry points
@@ -49,4 +48,4 @@ clean:
 # Development targets
 dev-structure:
 	@echo "Current project structure:"
-	tree -I '.git' . || find . -type d | grep -E "src|examples|tests" | sort
+	tree -I '.git' . || find . -type d | grep -E "src|tests" | sort

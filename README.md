@@ -2,7 +2,7 @@
 
 A Miranda implementation of solutions to exercises from **"Introduction to Functional Programming"** by Richard Bird and Philip Wadler.
 
-This repository contains working Miranda code, test suites, and examples to help understand functional programming concepts through the Miranda programming language.
+This repository contains working Miranda code and test suites to help understand functional programming concepts through the Miranda programming language.
 
 ## 📚 About
 
@@ -47,7 +47,7 @@ make
 ./tests/validate.sh
 ```
 
-### 3. Run Examples
+### 3. Run Tests
 
 ```bash
 # Run main program with all exercises
