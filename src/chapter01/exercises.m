@@ -1,5 +1,4 @@
-|| Chapter 1 Exercises - Introduction to Functional Programming
-|| Solutions to exercises from Bird & Wadler
+|| Chapter 1. Fundamental Concepts
 
 %export quad maximum circle_area square
 
@@ -7,15 +6,15 @@
 square x = x * x
 
 || Exercise 1.1.1
-|| Define a function quad that returns the fourth power of its argument
+|| Using a function `square`, design a function `quad` which raises its argument to the fourth power.
 quad x = square(square x)
 
 || Exercise 1.1.2
-|| Define a function maximum that returns the maximum of two numbers
+|| Define a function `max` which returns the greater of its two arguments.
+|| Note: the function was renamed to `maximum` to avoid clashing with Miranda's `max` function.
 maximum x y = x, if x >= y
             = y, if x < y
 
 || Exercise 1.1.3
-|| Define a function circle_area that computes the area of a circle given its radius
-|| Using approximation 22/7 for π
+|| Define a function for computing area of a circle with given radius r (use 22/7 as an approximation to π).
 circle_area r = 22 * square r / 7
