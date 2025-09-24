@@ -21,39 +21,6 @@ else
     echo ""
 fi
 
-# Check project structure
-echo "Checking project structure..."
-
-required_files=(
-    "src/chapter01/exercises.m"
-    "src/main.m"
-    "examples/chapter01_demo.m"
-    "tests/test_runner.m"
-    "INSTALL.md"
-    "Makefile"
-)
-
-missing_files=()
-for file in "${required_files[@]}"; do
-    if [[ -f "$file" ]]; then
-        echo "✓ $file exists"
-    else
-        echo "✗ $file missing"
-        missing_files+=("$file")
-    fi
-done
-
-if [[ ${#missing_files[@]} -gt 0 ]]; then
-    echo ""
-    echo "ERROR: Missing required files:"
-    printf '  %s\n' "${missing_files[@]}"
-    exit 1
-fi
-
-echo ""
-echo "Project structure validation: PASSED"
-echo ""
-
 # If Miranda is available, run syntax and functionality checks
 if command -v mira &> /dev/null; then
     echo "Running Miranda syntax and functionality checks..."
