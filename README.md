@@ -24,8 +24,9 @@ This project attempts to transform exercise solutions into a proper Miranda code
 │   ├── chapter01/
 │   │   └── exercises.m     # Chapter 1 solutions
 │   └── main.m             # Main entry point
-├── tests/                 # Test suites
-│   ├── test_runner.m      # Main test runner
+├── tests/                 # Test suites organized by chapter
+│   ├── chapter01/
+│   │   └── test_runner.m  # Chapter 1 tests
 │   └── validate.sh        # Project validation script
 ├── INSTALL.md             # Miranda installation guide
 ├── Makefile              # Build automation
@@ -57,7 +58,7 @@ make
 # Run main program with all exercises
 make run
 
-# Run test suite
+# Run test suite (executes each chapter's tests)
 make test
 ```
 
@@ -111,7 +112,7 @@ make check
 
 3. **Add tests:**
    ```miranda
-   # In tests/test_runner.m
+   # In tests/chapterNN/test_runner.m
    test_function_cases = [
        test_eq expected (function_name input) "description"
    ]
