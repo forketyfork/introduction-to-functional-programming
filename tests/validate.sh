@@ -39,16 +39,28 @@ if command -v mira &> /dev/null; then
     fi
     cd ..
 
-    # Test test runner compilation
-    echo "Testing test runner..."
+    # Test chapter test runner compilation
+    echo "Testing chapter test runners..."
     cd tests
-    if echo "" | mira test_runner.m &> /dev/null; then
-        echo "✓ Test runner compiles successfully"
-    else
-        echo "✗ Test runner compilation failed"
-        echo "Running mira test_runner.m for detailed error output:"
-        mira test_runner.m
-        exit 1
+    chapter_found=0
+    for runner in chapter*/test_runner.m; do
+        if [ -f "$runner" ]; then
+            chapter_found=1
+            chapter_dir=$(dirname "$runner")
+            chapter_name=$(basename "$chapter_dir")
+            echo "Testing $chapter_name..."
+            if echo "" | mira "$runner" &> /dev/null; then
+                echo "✓ $chapter_name test runner compiles successfully"
+            else
+                echo "✗ $chapter_name test runner compilation failed"
+                echo "Running mira $runner for detailed error output:"
+                mira "$runner"
+                exit 1
+            fi
+        fi
+    done
+    if [ $chapter_found -eq 0 ]; then
+        echo "No chapter test runners found."
     fi
     cd ..
 
