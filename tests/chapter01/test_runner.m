@@ -1,7 +1,7 @@
 || Test Runner for Introduction to Functional Programming Solutions
 || Basic testing framework for Miranda functions
 
-%include "../src/chapter01/exercises.m"
+%include "../../src/chapter01/exercises.m"
 
 || Test assertions and utilities
 
@@ -61,7 +61,7 @@ count_failed = total_tests - count_passed
 
 || Test summary
 test_summary = ["",
-                "=== TEST SUMMARY ===",
+                "=== CHAPTER 1 TEST SUMMARY ===",
                 "Total tests: " ++ show total_tests,
                 "Passed: " ++ show count_passed,
                 "Failed: " ++ show count_failed,

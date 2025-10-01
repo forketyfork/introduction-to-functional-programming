@@ -30,10 +30,19 @@ run: check-mira
 
 test: check-mira
 	@echo "Running tests..."
-	@if [ -f "$(TESTS_DIR)/test_runner.m" ]; then \
-		cd $(TESTS_DIR) && $(MIRA) test_runner.m; \
-	else \
-		echo "No tests available yet. Run 'make run'."; \
+	@set -e; \
+	found=0; \
+	for runner in $(TESTS_DIR)/chapter*/test_runner.m; do \
+	        if [ -f "$$runner" ]; then \
+	                found=1; \
+	                chapter_dir=$$(dirname "$$runner"); \
+	                chapter_name=$${chapter_dir##$(TESTS_DIR)/}; \
+	                echo "Running $$chapter_name tests..."; \
+	                (cd "$$chapter_dir" && $(MIRA) test_runner.m); \
+	        fi; \
+	done; \
+	if [ $$found -eq 0 ]; then \
+	        echo "No tests available yet. Run 'make run'."; \
 	fi
 
 check: run
