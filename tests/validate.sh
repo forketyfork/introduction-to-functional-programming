@@ -49,12 +49,17 @@ if command -v mira &> /dev/null; then
             chapter_dir=$(dirname "$runner")
             chapter_name=$(basename "$chapter_dir")
             echo "Testing $chapter_name..."
-            if echo "" | mira "$runner" &> /dev/null; then
-                echo "✓ $chapter_name test runner compiles successfully"
-            else
-                echo "✗ $chapter_name test runner compilation failed"
-                echo "Running mira $runner for detailed error output:"
-                mira "$runner"
+            if ! (
+                cd "$chapter_dir" &&
+                if mira test_runner.m < /dev/null &> /dev/null; then
+                    echo "✓ $chapter_name test runner compiles successfully"
+                else
+                    echo "✗ $chapter_name test runner compilation failed"
+                    echo "Running mira test_runner.m for detailed error output:"
+                    mira test_runner.m
+                    exit 1
+                fi
+            ); then
                 exit 1
             fi
         fi
